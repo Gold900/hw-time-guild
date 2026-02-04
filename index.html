@@ -3,40 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Приключения</title>
+    <title>Гильдия Времени - Схемы прохождения</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
-    <div class="tabs">
-        <div class="tab active" data-target="schemes">Схемы</div>
-        <div class="tab" id="open-players" data-target="players">Игроки</div>
-        <a href="https://oaslo.com/ru/" target="_blank" class="tab-button">Больше информации(старая ссылка на сайт)</a>
-    </div>
-
-    <div class="info-banner">
-        <p>ℹ️ Обратите внимание, что: </p>
-        <p class="info-banner-left">- Приклы нужно делать закрытыми воизбежание проблем с прохождением! Ознакомится с тем кого приглашать можно на вкладке "Игроки".</p>
-        <p class="info-banner-left">- В чате приклы обязательно нужно указать схему прохождения! (ответственность создающего).Формат схемы: Буква(при наличии) -> номер -> число игроков.</p>
-        <p class="info-banner-left">- В чате приклы можно обсудить схему и отклонения от неё.</p>
-        <p class="info-banner-left">- В чате приклы можно не указывать схему, если все участники привыкли проходить по одной и той же. НЕ ДОЛЖНО БЫТЬ СЮРПРИЗА!</p>
-        <p class="info-banner-left">- По всем вопросам и предложениям можно писать в чат гильдии.</p>
+    <!-- Шапка с флагом -->
+    <div class="header">
+        <div class="flag-container">
+            <img src="images/Flag.jpg" alt="Флаг гильдии Время" class="flag">
+        </div>
+        <h1 class="main-title">Гильдия "Время"</h1>
     </div>
     
-    <a href="https://forms.yandex.ru/u/69833b7090290231d818b4b7" target="_blank" class="tab-button">Пройти опрос</a>
+    <!-- Уведомления -->
+    <div class="notifications-container"></div>
+    
+    <!-- Навигация -->
+    <div class="tabs">
+        <div class="tab active" data-target="schemes">🗺️ Схемы</div>
+        <div class="tab" data-target="players">👥 Игроки</div>
+        <a href="https://oaslo.com/ru/" target="_blank" class="tab-button" rel="noopener noreferrer">ℹ️ Больше информации</a>
+    </div>
 
+    <!-- Информационный баннер -->
+    <div class="info-banner">
+        <p>ℹ️ Обратите внимание, что:</p>
+        <p class="info-banner-left">- Приключения нужно делать закрытыми во избежание проблем с прохождением!</p>
+        <p class="info-banner-left">- Ознакомиться с тем, кого приглашать можно на вкладке "Игроки".</p>
+        <p class="info-banner-left">- В чате приключений обязательно указывайте схему прохождения! (ответственность создающего).Формат схемы: Буква(при наличии) -> номер -> число игроков.</p>
+        <p class="info-banner-left">- В чате приклы можно обсудить схему и отклонения от неё.</p>
+        <p class="info-banner-left">- В чате приклы можно не указывать схему, если все участники привыкли проходить по одной и той же. НЕ ДОЛЖНО БЫТЬ СЮРПРИЗА!</p>
+        <p class="info-banner-left">- По всем вопросам и предложениям пишите в чат гильдии.</p>
+    </div>
 
-    <div id="schemes" class="content-section active">
-        <!-- Lightbox -->
-        <div class="lightbox" id="lightbox">
-            <img src="" alt="Полная картинка">
+    <!-- Кнопка опроса -->
+    <a href="https://forms.yandex.ru/u/69833b7090290231d818b4b7" target="_blank" class="tab-button survey-btn" rel="noopener noreferrer">📊 Пройти опрос</a>
+
+    <!-- Контентные секции -->
+    <div id="schemes" class="content-section active"></div>
+    <div id="players" class="content-section">
+        <div class="table-container">
+            <div class="table-header">
+                <button id="editModeBtn" class="button button--secondary">✏️ Режим редактирования</button>
+                <button id="addPlayerBtn" class="button button--primary" style="display: none;">➕ Добавить игрока</button>
+            </div>
+            <div class="table-wrapper">
+                <table id="playersTable">
+                    <thead>
+                        <tr>
+                            <th data-sort="nick">Ник <span class="sort-icon">↕️</span></th>
+                            <th data-sort="maxLevel">Макс. уровень <span class="sort-icon">↕️</span></th>
+                            <th data-sort="withGreat">С Великим <span class="sort-icon">↕️</span></th>
+                            <th class="actions-column" style="display: none;">Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="playersTableBody">
+                        <!-- Данные загружаются через JS -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
+    <!-- Модальное окно для редактирования игрока -->
+    <div id="playerModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Добавить игрока</h2>
+            <form id="playerForm">
+                <div class="form-group">
+                    <label for="nick" class="form-label">Ник *</label>
+                    <input type="text" id="nick" class="form-input" required maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label for="maxLevel" class="form-label">Макс. уровень</label>
+                    <input type="text" id="maxLevel" class="form-input" placeholder="Пример: 12, 13.12, от 9?">
+                </div>
+                <div class="form-group">
+                    <label for="withGreat" class="form-label">С Великим</label>
+                    <select id="withGreat" class="form-input">
+                        <option value="?">❓ Неизвестно</option>
+                        <option value="+">✅ Да</option>
+                        <option value="-">❌ Нет</option>
+                    </select>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="button button--primary">Сохранить</button>
+                    <button type="button" class="button" id="cancelBtn">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-<script src="js/ui_routes.js" defer></script>
-<script src="js/ui_table.js" defer></script>
-<script src="js/script.js" defer></script>
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <img src="" alt="Полная картинка">
+    </div>
 
+    <!-- Загрузчик -->
+    <div class="loader" id="loader" style="display: none;">
+        <div class="spinner"></div>
+        <p>Загрузка...</p>
+    </div>
+
+    <script src="js/ui_routes.js" defer></script>
+    <script src="js/ui_table.js" defer></script>
+    <script src="js/script.js" defer></script>
 </body>
 </html>

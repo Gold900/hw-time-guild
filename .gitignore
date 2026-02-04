@@ -1,0 +1,46 @@
+# Файлы операционной системы
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Файлы редакторов кода
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Файлы Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Временные файлы
+*.tmp
+*.temp
+*.log
+
+# Файлы сборки/компиляции
+dist/
+build/
+*.min.js
+*.min.css
+
+# Файлы среды разработки
+.env
+.env.local
+.env.development
+.env.production
+
+# Файлы базы данных
+*.db
+*.sqlite
+
+# Локальные копии изображений (если они генерируются)
+/temp-images/
+/cache/
+
+# Системные файлы
+*.bak
+*.backup

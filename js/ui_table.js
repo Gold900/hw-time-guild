@@ -1,107 +1,33 @@
-/*
-todo: Надо было добавить ключи API в таблицу, что бы как только игрок прошел приклу уровнем выше. Информация в таблице изменилась)))))
-Автор: ЦАРЬ
-*/
-
-
-// Табличку из кода создаём
-class PlayerRow {
-    constructor(nick, maxLevel, withGreat) {
-        this.nick = String(nick);
-        this.maxLevel = String(maxLevel);
-        this.withGreat = String(withGreat);
-    }
-}
-
-const players = [
-    new PlayerRow('ЦАРЬ', '12', '+'),
-    new PlayerRow('Марс', 'от 9?', '?'),
-    new PlayerRow('AND-XXX', 'от 11?', '?'),
-    new PlayerRow('Respect J.J.', '12', '-'),
-    new PlayerRow('Тупо Бот', '10', '-'),
-    new PlayerRow('Kring12', '13.12', '+'),
-    new PlayerRow('юра', '10?', '?'),
-    new PlayerRow('Integra', '11?', '?'),
-    new PlayerRow('ABAKAN', '11?', '?'),
-    new PlayerRow('ALEX', '11?', '?'),
-    new PlayerRow('Tausida', '13.12', '+'),
-    new PlayerRow('Гала', '10?', '?'),
-    new PlayerRow('Neomaster', '12?', '-'),
-    new PlayerRow('Январь', '13.12', '+'),
-    new PlayerRow('Team Raymond', '?', '?'),
-    new PlayerRow('Team A', '13.12', '+'),
-    new PlayerRow('Галахад', '13.12', '+?'),
-    new PlayerRow('DaHyHax', '13.12', '+'),
-    new PlayerRow('Kagakora', '13.12', '+'),
-    new PlayerRow('FamilyWarriors', '?', '?'),
-    new PlayerRow('Перфекционист', '13.12', '+'),
-    new PlayerRow('Blagodatnyj', '?', '?'),
-    new PlayerRow('Олег', '10?', '?'),
-    new PlayerRow('тан сан', '?', '?'),
-    new PlayerRow('Pulpo', '?', '?'),
-    new PlayerRow('Skit Skit Bang', '?', '?'),
-    new PlayerRow('Team HICHBLACK', '?', '?'),
+// Инициализируем начальные данные игроков
+window.initialPlayers = [
+    { nick: 'ЦАРЬ', maxLevel: '12', withGreat: '+' },
+    { nick: 'Марс', maxLevel: 'от 9?', withGreat: '?' },
+    { nick: 'AND-XXX', maxLevel: 'от 11?', withGreat: '?' },
+    { nick: 'Respect J.J.', maxLevel: '12', withGreat: '-' },
+    { nick: 'Тупо Бот', maxLevel: '10', withGreat: '-' },
+    { nick: 'Kring12', maxLevel: '13.12', withGreat: '+' },
+    { nick: 'юра', maxLevel: '10?', withGreat: '?' },
+    { nick: 'Integra', maxLevel: '11?', withGreat: '?' },
+    { nick: 'ABAKAN', maxLevel: '11?', withGreat: '?' },
+    { nick: 'ALEX', maxLevel: '11?', withGreat: '?' },
+    { nick: 'Tausida', maxLevel: '13.12', withGreat: '+' },
+    { nick: 'Гала', maxLevel: '10?', withGreat: '?' },
+    { nick: 'Neomaster', maxLevel: '12?', withGreat: '-' },
+    { nick: 'Январь', maxLevel: '13.12', withGreat: '+' },
+    { nick: 'Team Raymond', maxLevel: '?', withGreat: '?' },
+    { nick: 'Team A', maxLevel: '13.12', withGreat: '+' },
+    { nick: 'Галахад', maxLevel: '13.12', withGreat: '+?' },
+    { nick: 'DaHyHax', maxLevel: '13.12', withGreat: '+' },
+    { nick: 'Kagakora', maxLevel: '13.12', withGreat: '+' },
+    { nick: 'FamilyWarriors', maxLevel: '?', withGreat: '?' },
+    { nick: 'Перфекционист', maxLevel: '13.12', withGreat: '+' },
+    { nick: 'Blagodatnyj', maxLevel: '?', withGreat: '?' },
+    { nick: 'Олег', maxLevel: '10?', withGreat: '?' },
+    { nick: 'тан сан', maxLevel: '?', withGreat: '?' },
+    { nick: 'Pulpo', maxLevel: '?', withGreat: '?' },
+    { nick: 'Skit Skit Bang', maxLevel: '?', withGreat: '?' },
+    { nick: 'Team HICHBLACK', maxLevel: '?', withGreat: '?' }
 ];
 
-function createPlayersTable(players) {
-    const table = document.createElement('table');
-
-    // Заголовок
-    const headerRow = document.createElement('tr');
-    ['Ник', 'Максимальный номер приклы', 'С Великим']
-        .forEach(text => {
-            const th = document.createElement('th');
-            th.textContent = text;
-            headerRow.appendChild(th);
-        });
-
-    table.appendChild(headerRow);
-
-    // Данные
-    players.forEach(player => {
-        const tr = document.createElement('tr');
-
-        const tdNick = document.createElement('td');
-        tdNick.textContent = player.nick;
-
-        const tdMax = document.createElement('td');
-        tdMax.textContent = player.maxLevel;
-
-        const tdGreat = document.createElement('td');
-        tdGreat.textContent = player.withGreat;
-
-        tr.append(tdNick, tdMax, tdGreat);
-        table.appendChild(tr);
-    });
-
-    return table;
-}
-
-function createPlayersModal() {
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-    modal.id = 'playersModal';
-
-    const content = document.createElement('div');
-    content.className = 'modal-content';
-    content.style.width = '90%';
-    content.style.height = '90%';
-    content.style.overflow = 'auto';
-
-    const close = document.createElement('span');
-    close.className = 'close';
-    close.textContent = '×';
-
-    const title = document.createElement('h2');
-    title.textContent =
-        'Кого звать в приклу? (Если видите в номере только знак вопроса — лучше через лс)';
-
-    const table = createPlayersTable(players);
-
-    content.append(close, title, table);
-    modal.appendChild(content);
-    document.body.appendChild(modal);
-}
-
-createPlayersModal(); // рисуем табличку
-
+// Этот файл теперь содержит только начальные данные
+// Вся логика работы с таблицей перенесена в script.js
